@@ -2,16 +2,18 @@
 import React, {useState} from 'react';
 import {
   Dimensions,
+  Image,
   SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from 'react-native';
 import Shimmering from '../../../components/loading/shimer';
 import CachedImage from '../../../components/image/FastImageView';
 import axios from 'axios';
+import images from '../../../constants/images';
+import MyCarousel from '../../../components/carousel/Carousel';
 
 const {width: screenWidth} = Dimensions.get('screen');
 const width = screenWidth * 0.92 - 30;
@@ -29,9 +31,6 @@ interface Photo {
 }
 
 function MainScreen() {
-  const [fetching, setFetching] = useState(true);
-  const [photos, setPhotos] = useState<Photo[]>([]);
-
   const renderList = () => {
     return list.map((val, index) => (
       <React.Fragment key={index}>
@@ -70,35 +69,27 @@ function MainScreen() {
     ));
   };
 
-  const fetchPhotos = async () => {
-    try {
-      const response = await axios.get(
-        'https://jsonplaceholder.typicode.com/photos',
-      );
-      // setPhotos(response);
-      console.log('### res', response);
-    } catch (error) {
-      console.error('Error fetching photos:', error);
-    }
-  };
+  const dataTest = Array.from({length: 100}, (_, index) => ({
+    key: String(index),
+  }));
 
   return (
     <SafeAreaView>
-      <TouchableOpacity
-        onPress={fetchPhotos}
-        className="h-[55px] bg-yellow-400 items-center justify-center mx-8 rounded-md">
-        <Text className="font-bold text-[24px]">FetchData</Text>
-      </TouchableOpacity>
-      <ScrollView style={styles.container}>
+      <ScrollView>
         <View
           className="w-full "
           style={{justifyContent: 'center', alignItems: 'center'}}>
           <Text className="text-blue-500 ">Hello React Native</Text>
-          <CachedImage
-            imageUrl="https://media.istockphoto.com/id/1146517111/photo/taj-mahal-mausoleum-in-agra.jpg?s=612x612&w=0&k=20&c=vcIjhwUrNyjoKbGbAQ5sOcEzDUgOfCsm9ySmJ8gNeRk="
-            style={styles.image}
-            resizeMode="cover"
-          />
+          {/* {dataTest.length > 1 &&
+            dataTest.map((item, index) => (
+              <CachedImage
+                key={index}
+                imageUrl={`https://picsum.photos/200/300?random=${item.key}`}
+                style={styles.image}
+                resizeMode="cover"
+              />
+            ))} */}
+          <MyCarousel />
         </View>
       </ScrollView>
     </SafeAreaView>

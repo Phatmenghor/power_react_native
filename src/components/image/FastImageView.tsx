@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import {View, Image, Text, StyleSheet} from 'react-native';
+import {View, Image, Text, StyleSheet, ActivityIndicator} from 'react-native';
 import FastImage, {FastImageProps} from 'react-native-fast-image';
+import images from '../../constants/images';
 
 interface FastImageWithLoadingAndErrorHandlingProps {
   imageUrl: string;
@@ -34,9 +35,9 @@ const FastImageWithLoadingAndErrorHandling: React.FC<
       {loading && (
         <View style={styles.loadingContainer}>
           <Image
-            source={placeholderSource}
             style={[styles.image, style]}
-            resizeMode={resizeMode as 'cover'}
+            source={images.hun}
+            resizeMode="cover"
           />
         </View>
       )}
@@ -78,8 +79,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   image: {
-    width: '100%',
-    height: '100%',
+    width: 200,
+    height: 200,
   },
 });
 
