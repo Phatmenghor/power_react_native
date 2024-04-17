@@ -13,7 +13,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import Zocial from 'react-native-vector-icons/Zocial';
-import colors from '../constants/colors';
+import theme from '../constants/theme';
 import keyIcon from '../constants/keyIcon';
 
 interface IconProps {
@@ -27,7 +27,7 @@ interface IconProps {
 const IconUtil: React.FC<IconProps> = ({
   name,
   size,
-  color = colors.primaryColor,
+  color = theme.colors.white,
   type = keyIcon.material,
   iconStyle,
 }) => {

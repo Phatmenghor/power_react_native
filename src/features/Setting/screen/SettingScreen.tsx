@@ -10,7 +10,7 @@ const list = new Array(10).fill(undefined).map((val, index) => ({
   name: 'name',
 }));
 
-function MainScreen() {
+function SettingScreen() {
   const [fetching, setFetching] = useState(true);
   const renderList = () => {
     return list.map((val, index) => (
@@ -82,4 +82,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MainScreen;
+export default SettingScreen;
