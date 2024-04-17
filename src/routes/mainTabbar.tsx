@@ -7,7 +7,6 @@ import {RouteProp} from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {ParamListBase} from '@react-navigation/routers';
 import MainScreen from '../features/Main/screen/MainScreen';
-import Feather from 'react-native-vector-icons/Feather';
 
 const Tab = createBottomTabNavigator();
 

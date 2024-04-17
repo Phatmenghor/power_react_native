@@ -1,8 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState} from 'react';
+import React from 'react';
 import {
   Dimensions,
-  Image,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -10,9 +9,6 @@ import {
   View,
 } from 'react-native';
 import Shimmering from '../../../components/loading/shimer';
-import CachedImage from '../../../components/image/FastImageView';
-import axios from 'axios';
-import images from '../../../constants/images';
 import MyCarousel from '../../../components/carousel/Carousel';
 
 const {width: screenWidth} = Dimensions.get('screen');
@@ -21,14 +17,6 @@ const list = new Array(10).fill(undefined).map((val, index) => ({
   id: index,
   name: 'name',
 }));
-
-interface Photo {
-  id: number;
-  title: string;
-  url: string;
-  thumbnailUrl: string;
-  albumId: number;
-}
 
 function MainScreen() {
   const renderList = () => {
@@ -80,15 +68,6 @@ function MainScreen() {
           className="w-full "
           style={{justifyContent: 'center', alignItems: 'center'}}>
           <Text className="text-blue-500 ">Hello React Native</Text>
-          {/* {dataTest.length > 1 &&
-            dataTest.map((item, index) => (
-              <CachedImage
-                key={index}
-                imageUrl={`https://picsum.photos/200/300?random=${item.key}`}
-                style={styles.image}
-                resizeMode="cover"
-              />
-            ))} */}
           <MyCarousel />
         </View>
       </ScrollView>
