@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
 import {Dimensions, ScrollView, StyleSheet, Text, View} from 'react-native';
-import Shimmering from '../../../components/loading/shimer';
+import Shimmering from '../../../components/loading/Shimer';
 
 const {width: screenWidth} = Dimensions.get('screen');
 const width = screenWidth * 0.92 - 30;

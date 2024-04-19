@@ -33,8 +33,8 @@ const Shimmering: React.FC<IProps> = ({
     Animated.loop(
       Animated.timing(shimmeringAnimatedValue, {
         useNativeDriver: false,
-        delay: 1200,
-        duration: 750,
+        delay: 800,
+        duration: 1500,
         toValue: 1,
       }),
     ).start();

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Image, Text, StyleSheet, ActivityIndicator} from 'react-native';
+import {View, Image, Text, StyleSheet, Animated} from 'react-native';
 import FastImage, {FastImageProps} from 'react-native-fast-image';
 import images from '../../constants/images';
 
@@ -10,11 +10,14 @@ interface FastImageWithLoadingAndErrorHandlingProps {
   placeholderSource?: any;
 }
 
-const FastImageWithLoadingAndErrorHandling: React.FC<
-  FastImageWithLoadingAndErrorHandlingProps
-> = ({imageUrl, style, resizeMode = 'cover', placeholderSource}) => {
+const FastImageView: React.FC<FastImageWithLoadingAndErrorHandlingProps> = ({
+  imageUrl,
+  style,
+  resizeMode = 'cover',
+}) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [imageScaleValue] = useState(new Animated.Value(0));
 
   const handleLoadStart = () => {
     setLoading(true);
@@ -22,6 +25,12 @@ const FastImageWithLoadingAndErrorHandling: React.FC<
   };
 
   const handleLoadEnd = () => {
+    Animated.timing(imageScaleValue, {
+      toValue: 1,
+      duration: 300,
+      delay: 5,
+      useNativeDriver: true,
+    }).start();
     setLoading(false);
   };
 
@@ -42,18 +51,20 @@ const FastImageWithLoadingAndErrorHandling: React.FC<
         </View>
       )}
       {error && (
-        <View style={styles.errorContainer}>
+        <View style={[styles.errorContainer, style]}>
           <Text style={styles.errorText}>Error loading image!</Text>
         </View>
       )}
-      <FastImage
-        style={[styles.image, style]}
-        source={{uri: imageUrl}}
-        resizeMode={resizeMode}
-        onLoadStart={handleLoadStart}
-        onLoadEnd={handleLoadEnd}
-        onError={handleError}
-      />
+      <Animated.View style={{opacity: imageScaleValue}}>
+        <FastImage
+          style={[styles.image, style]}
+          source={{uri: imageUrl}}
+          resizeMode={resizeMode}
+          onLoadStart={handleLoadStart}
+          onLoadEnd={handleLoadEnd}
+          onError={handleError}
+        />
+      </Animated.View>
     </View>
   );
 };
@@ -84,4 +95,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FastImageWithLoadingAndErrorHandling;
+export default FastImageView;
